@@ -24,7 +24,7 @@ end
 
 class MyPiece < Piece
   # The constant All_My_Pieces should be declared here
-  Chat_Pieces = [[[0, 0]]]
+  Cheat_Pieces = [[[0, 0]]]
 
   All_My_Pieces = All_Pieces + [rotations([[0, 0], [1, 0], [0, 1], [1, 1], [-1, 0]]),
       [[[-1, 0], [-2, 0], [0, 0], [1, 0], [2, 0]],
@@ -36,7 +36,7 @@ class MyPiece < Piece
   end
 
   def self.cheat_piece (board)
-    MyPiece.new(Chat_Pieces, board)
+    MyPiece.new(Cheat_Pieces, board)
   end
 
   # your enhancements here

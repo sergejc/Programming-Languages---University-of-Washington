@@ -117,6 +117,18 @@ class Point < GeometryValue
     @x = x
     @y = y
   end
+
+  def eval_prog env
+    self # all values evaluate to self
+  end
+
+  def preprocess_prog
+    Point.new(@x,@y)
+  end
+
+  def shift(dx,dy)
+    Point.new(@x + dx,@y + dy)
+  end
 end
 
 class Line < GeometryValue
@@ -162,6 +174,10 @@ class Intersect < GeometryExpression
     @e1 = e1
     @e2 = e2
   end
+
+  def preprocess_prog
+    Intersect.new(@e1,@e2)
+  end
 end
 
 class Let < GeometryExpression
@@ -172,6 +188,10 @@ class Let < GeometryExpression
     @e1 = e1
     @e2 = e2
   end
+
+  def preprocess_prog
+    Let.new(@s,@e1,@e2)
+  end
 end
 
 class Var < GeometryExpression
@@ -179,6 +199,10 @@ class Var < GeometryExpression
   # override any methods
   def initialize s
     @s = s
+  end
+
+  def preprocess_prog
+    Var.new @s
   end
 end
 
@@ -189,5 +213,9 @@ class Shift < GeometryExpression
     @dx = dx
     @dy = dy
     @e = e
+  end
+
+  def preprocess_prog
+    Shift.new(@dx,@dy,@e)
   end
 end
